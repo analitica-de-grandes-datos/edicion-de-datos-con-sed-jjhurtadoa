@@ -33,6 +33,15 @@
 #  El programa se llamara por el evaluador tal como se indica a continuación:
 #
 #  $ bash question.sh data.csv > output.csv
+
+filename=$1
+sed -e 's:\([0-9]\+\)/\([0-9]\+\)/\([0-9]\+\);:\3-\2-\1;:' $filename  |
+sed -e 's/^\([0-9][0-9]\)-/20\1-/'  |
+sed -e 's/,/./g' |
+sed -e 's/-\([0-9]\)-\([0-9]\);/-0\1-0\2;/'  |
+sed -e 's/;;/;\\N;/' |
+sed -e 's/;/,/g'
+
 #  
 #  Rta/
 #  2013-03-12,A,1,100.0
