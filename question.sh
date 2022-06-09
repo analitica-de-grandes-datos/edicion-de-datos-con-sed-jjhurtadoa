@@ -41,3 +41,13 @@
 #
 #  >>> Escriba su codigo a partir de este punto <<<
 #
+filename=$1
+sed -e 's:\([0-9]\+\)/\([0-9]\+\)/\([0-9]\+\);:\3-\2-\1;:' $filename  |
+sed -e 's/^\([0-9][0-9]\)-/20\1-/'  |
+sed -e 's/,/./g' |
+sed -e 's/-\([0-9]\)-\([0-9]\);/-0\1-0\2;/'  |
+sed -e 's/;;/;\\N;/' |
+sed -e 's/;/,/g' |
+sed -e 's/,$/,\\N/' |
+sed -e 's/[a-z]/\U&/g' |
+sed -e 's/,N/,\\N/'
